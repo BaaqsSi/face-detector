@@ -1,2 +1,0 @@
-﻿  oi.cpp
-LINK : fatal error LNK1104: cannot open file 'opencv_world4100.lib'

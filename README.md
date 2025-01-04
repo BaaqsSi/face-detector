@@ -25,3 +25,6 @@ da aplikacia mainc mushaobs ris gamoc errorebi iqneba bevri, pc-ze startupze day
 
 
 yvelafris source aris mocemuli, filebi ki daulagebelia radganac mezaraeba dalageba.
+
+
+random foto avighe internetidan rorame...

@@ -1,5 +1,5 @@
 # face-detector
-face-detector .ujisho windows face id type shi',  mushaobs raghac doneze aq cudi GUI radganac gamoviyene tradiciuli GUI method.
+face-detector. ujisho windows face id type shi',  mushaobs raghac doneze. aq cudi GUI radganac gamoviyene tradiciuli GUI method.
 
 
 MUSHAOBS MXOLOD WINDOWS-ZE.
@@ -21,7 +21,7 @@ exe file rtavs GLFW,GLEW it gaketebul fanjaras fullscreenze,blokavs klaviaturas 
 WARNING....
 
 TU ar gaqvt camera da iyenebt obs,iriun webcam-s gtxovt startupze daayenot aplikaciebi radganac magat driverebs -pc aghiqvams
-da aplikacia mainc mushaobs ris gamoc errorebi iqneba bevri pc-ze startupze dayenebuli apliakcia ubralod swore ar imushavebs.
+da aplikacia mainc mushaobs ris gamoc errorebi iqneba bevri, pc-ze startupze dayenebuli apliakcia ubralod swore ar imushavebs.
 
 
 yvelafris source aris mocemuli, filebi ki daulagebelia radganac mezaraeba dalageba.

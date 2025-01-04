@@ -5,7 +5,9 @@
 #include <wchar.h>
 #include <string>
 #include <filesystem>
-//globalze declare vuketebt yleobebs
+
+
+//global-ze declare vuketebt yleobebs
 cv::VideoCapture op;
 cv::Mat frame;
 cv::CascadeClassifier face_casc;
@@ -178,52 +180,86 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam) 
         }
         //take a screenshot function
         else if (LOWORD(wparam) == 4) {
-            if (op.isOpened()) {
-                op >> frame;
-                cv::imwrite("Screenshot.png", frame);
+            if (!op.isOpened()) {
+                MessageBox(hwnd, L"Please open the camera first.", L"Camera Not Opened", MB_OK | MB_ICONWARNING);
+                break;
+            }
+
+            // vkitxulobt current frames videodan
+            op >> frame;
+            if (frame.empty()) {
+                MessageBox(hwnd, L"Failed to capture frame from the camera.", L"Capture Error", MB_OK | MB_ICONERROR);
+                break;
+            }
+
+            if (!face_casc.load("haarcascade_frontalface_default.xml")) {
+                MessageBox(hwnd, L"Failed to load the cascade classifier!", L"Error", MB_OK | MB_ICONERROR);
+                break;
+            }
+
+            // facebs detect-s vuketebt framebshi
+            std::vector<cv::Rect> faces;
+            cv::Mat resizedFrame;
+            cv::resize(frame, resizedFrame, cv::Size(), 0.5, 0.5);
+            face_casc.detectMultiScale(resizedFrame, faces, 1.1, 3, 0, cv::Size(30, 30));
+
+            // vnaxulobt tu facebi amoigho frmaeidan
+            if (faces.empty()) {
+                MessageBox(hwnd, L"No faces detected in the frame. Please adjust your position and try again.", L"Face Not Found", MB_OK | MB_ICONWARNING);
+                break;
+            }
+
+            // vasavebt Screenshot.png -d tu yvelafeir sworea
+            if (cv::imwrite("Screenshot.png", frame)) {
+                MessageBox(hwnd, L"Screenshot saved successfully.", L"Success", MB_OK | MB_ICONINFORMATION);
             }
             else {
-                MessageBox(hwnd, L"please open the camera first..", L"Camera is not Opened", MB_OK | MB_ICONWARNING);
-
+                MessageBox(hwnd, L"Failed to save the screenshot.", L"Error", MB_OK | MB_ICONERROR);
             }
         }
 
+
         //run function
         else if (LOWORD(wparam) == 5) {
-            // vnaxulobt tu kamera chartulia radganac kameris gareshe pc veghar gaixsneba safe mode gareshe
+            // vnaxulobt tu camera kidev aris gaxsnili radganac frame bi gamoitanos da ar gaichedos
+            if (op.isOpened()) {
+                MessageBox(hwnd, L"Please close the camera before running Face ID.", L"Camera In Use", MB_OK | MB_ICONWARNING);
+                break;
+            }
+
+            // vcheckavt tu camera available aris
             if (!isCameraAvailable()) {
                 MessageBox(hwnd, L"No camera detected on this PC. Please connect a camera to proceed.", L"Camera Not Found", MB_OK | MB_ICONERROR);
                 break;
             }
+
             if (!face_casc.load("haarcascade_frontalface_default.xml")) {
                 MessageBox(hwnd, L"Failed to load the cascade classifier!", L"Error", MB_OK | MB_ICONERROR);
-                break; // Exit if the classifier cannot be loaded
-            }
-
-            // frame wavikitxot screenshotidan
-            cv::Mat img = cv::imread("Screenshot.png");
-
-            // vnaxot tu screenshot empty aris frame wakitxvis mere
-            if (img.empty()) {
-                MessageBox(hwnd, L"Please take a screenshot first..", L"Screenshot not found", MB_OK | MB_ICONWARNING);
                 break;
             }
 
-            // vnaxulobt tu face moizebneba face shi
+            // vnaxulobt tu screenshot png arisebobs radganac comparingisatvis gvchirdeba
+            cv::Mat img = cv::imread("Screenshot.png");
+            if (img.empty()) {
+                MessageBox(hwnd, L"Please take a screenshot first.", L"Screenshot Not Found", MB_OK | MB_ICONWARNING);
+                break;
+            }
+
+            // facebs vezebt potoshi
             std::vector<cv::Rect> faces;
             cv::Mat resizedFrame;
             cv::resize(img, resizedFrame, cv::Size(), 0.5, 0.5);
             face_casc.detectMultiScale(resizedFrame, faces, 1.1, 3, 0, cv::Size(30, 30));
 
-            // vnaxulobt tu rame face aris detected vectorshi
             if (faces.empty()) {
-                MessageBox(hwnd, L"Can't detect a face in the screenshot. Please capture a new one.", L"Face not found in screenshot", MB_OK | MB_ICONERROR);
+                MessageBox(hwnd, L"Face not detected in the screenshot. Please try again.", L"Face Not Found", MB_OK | MB_ICONERROR);
                 break;
             }
 
-            // tu kamera gaixsna  ,img ipova da aseve face moizebna image-shi ixsneba mtavari exe file.
+            //tu yvelaferi kargad iyo exe files vushvevbt
             openexe("opencv.exe");
         }
+
 
 
 

@@ -8,7 +8,7 @@ MUSHAOBS MXOLOD WINDOWS-ZE.
 TU testing gindat example-shi mocemulia exe filebi. jer rtavt testing.exe-s  XOLO opencv.exe-s ar exebit.
 
 
-        ::FACE-DETECTOR::
+        FACE-DETECTOR
 
 sheqmnilia opencv-it, gaachnia tavisi GUI romelic aris tradiciuli gzit gaketebuli windows.h -it.
 aqvs 3 function:

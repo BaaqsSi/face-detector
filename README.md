@@ -25,6 +25,6 @@ da aplikacia mainc mushaobs ris gamoc errorebi iqneba bevri, pc-ze startupze day
 
 
 yvelafris source aris mocemuli, filebi ki daulagebelia radganac mezaraeba dalageba.
-
+open-cv calke aris mocemuli radganac misi exe file maq gamoyenebuli testing-shi radganac open-cv calke maq dawerili daulagebeli kodi iyo isedac. 
 
 random foto avighe internetidan rorame...
